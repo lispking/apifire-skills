@@ -9,7 +9,7 @@
   },
   "plugins": [
     {
-      "name": "apifire",
+      "name": "apifire-skills",
       "description": "Skill for API testing workflows in Claude Code.",
       "source": "./",
       "category": "development"

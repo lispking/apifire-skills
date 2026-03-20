@@ -29,7 +29,7 @@ Recommended flow in Claude Code:
 
 ```text
 /plugin marketplace add lispking/apifire-skills
-/plugin install apifire-skills
+/plugin install apifire-skills@apifire-skills
 ```
 
 After installation, Claude Code should discover the `apifire` skill from the installed plugin.
