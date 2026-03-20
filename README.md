@@ -4,9 +4,9 @@ Open-source Claude Code skill files for the `apifire` CLI.
 
 ## Included skill
 
-- `skills/apifire/`
+- `apifire`
 
-This skill helps turn natural-language requests into verified `apifire` commands for:
+This plugin installs a Claude Code skill that helps turn natural-language requests into verified `apifire` commands for:
 - initializing API test projects
 - running API tests
 - running auth-only flows
@@ -15,41 +15,28 @@ This skill helps turn natural-language requests into verified `apifire` commands
 
 ## Repository layout
 
-- `install.sh` — installer for copying the skill into a Claude skills directory
-- `skills/apifire/SKILL.md` — main skill definition
-- `skills/apifire/examples.md` — verified example prompts and commands
-- `skills/apifire/README.md` — installation and usage notes
+- `.claude-plugin/marketplace.json` — plugin marketplace metadata
+- `.claude/skills/apifire/` — installable Claude Code skill
+- `skills/apifire/` — source copy of the skill files
+- `install.sh` — legacy installer for direct file-based installation
 
-## Install locally
+## Install with Claude Code plugins
 
-### One-line install
+Recommended flow in Claude Code:
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/lispking/apifire-skills/main/install.sh | sh
+1. Add this repository from the plugin marketplace.
+2. Install the plugin into your Claude Code environment.
+
+```text
+/plugin marketplace add lispking/apifire-skills
+/plugin install apifire-skills
 ```
 
-Install to the user-level Claude skills directory instead:
+After installation, Claude Code should discover the `apifire` skill from the installed plugin.
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/lispking/apifire-skills/main/install.sh | sh -s -- --user
-```
+## Alternative local setup
 
-Install to a specific Claude skills directory instead:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/lispking/apifire-skills/main/install.sh | sh -s -- --target /path/to/.claude/skills
-```
-
-### Download first, then run
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/lispking/apifire-skills/main/install.sh -o install.sh
-sh install.sh
-```
-
-### Manual install
-
-If you want Claude Code to discover this skill in a project, copy or symlink it into `.claude/skills/`.
+If you want to use the files directly from a local checkout instead of installing via plugins, Claude Code can discover repo-local skills from `.claude/skills/`.
 
 Example:
 
@@ -58,14 +45,11 @@ mkdir -p .claude/skills
 ln -s ../../skills/apifire .claude/skills/apifire
 ```
 
-You can also copy it into your user-level Claude skills directory if that matches your setup.
+You can also copy it into a user-level Claude skills directory if that matches your setup.
 
-## Installer behavior
+## Legacy installer
 
-- default target: `./.claude/skills/apifire`
-- `--user`: installs to `$HOME/.claude/skills/apifire`
-- `--target DIR`: installs to `DIR/apifire`
-- existing installations are replaced with the current copy
+This repository still includes `install.sh` for environments that prefer direct file-based installation, but plugin-based installation is the recommended path.
 
 ## Command coverage
 

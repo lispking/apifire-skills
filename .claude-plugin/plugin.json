@@ -1,0 +1,19 @@
+{
+  "name": "apifire-skills",
+  "version": "0.1.0",
+  "description": "Claude Code plugin that installs the apifire skill for API testing workflows.",
+  "author": {
+    "name": "lispking",
+    "url": "https://github.com/lispking"
+  },
+  "repository": "https://github.com/lispking/apifire-skills",
+  "homepage": "https://github.com/lispking/apifire-skills",
+  "license": "Apache-2.0",
+  "keywords": [
+    "api",
+    "testing",
+    "claude-code",
+    "skill",
+    "workflow"
+  ]
+}

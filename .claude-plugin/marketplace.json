@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "apifire-skills",
+  "version": "0.1.0",
+  "description": "Claude Code plugin that installs the apifire skill for API testing workflows.",
+  "owner": {
+    "name": "lispking",
+    "url": "https://github.com/lispking"
+  },
+  "plugins": [
+    {
+      "name": "apifire",
+      "description": "Skill for API testing workflows in Claude Code.",
+      "source": "./",
+      "category": "development"
+    }
+  ]
+}

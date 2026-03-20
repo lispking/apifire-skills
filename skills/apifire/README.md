@@ -1,42 +1,35 @@
+---
+name: apifire
+version: 0.1.0
+---
+
 # apifire Claude Code skill
 
-This repository ships an `apifire` Claude Code skill in `skills/apifire/` so it is easy to review, fork, and reuse in open-source workflows.
+This repository ships an `apifire` Claude Code skill in `.claude/skills/apifire/` so it can be installed through the Claude Code plugin system.
 
 ## Files
 
-- `skills/apifire/SKILL.md`
-- `skills/apifire/examples.md`
+- `.claude/skills/apifire/SKILL.md`
+- `.claude/skills/apifire/examples.md`
+- `skills/apifire/` — source copy in the repository
 
-## Install
+## Install with Claude Code plugins
 
-### One-line install
+Recommended flow in Claude Code:
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/lispking/apifire-skills/main/install.sh | sh
+1. Add this repository from the plugin marketplace.
+2. Install the plugin into your Claude Code environment.
+
+```text
+/plugin marketplace add lispking/apifire-skills
+/plugin install apifire-skills
 ```
 
-Install to the user-level Claude skills directory instead:
+After installation, Claude Code should load the `apifire` skill from the installed plugin.
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/lispking/apifire-skills/main/install.sh | sh -s -- --user
-```
+## Alternative local setup
 
-Install to a specific Claude skills directory instead:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/lispking/apifire-skills/main/install.sh | sh -s -- --target /path/to/.claude/skills
-```
-
-### Download first, then run
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/lispking/apifire-skills/main/install.sh -o install.sh
-sh install.sh
-```
-
-### Manual install
-
-Claude Code discovers repo-local skills from `.claude/skills/`, so for local use you can copy or symlink this skill into your own Claude skills directory.
+Claude Code also discovers repo-local skills from `.claude/skills/`, so for local use you can copy or symlink this skill into your own Claude skills directory.
 
 Example:
 
@@ -47,12 +40,9 @@ ln -s ../../skills/apifire .claude/skills/apifire
 
 Or copy it into a user-level Claude skills directory if that is how you organize your setup.
 
-## Installer behavior
+## Legacy installer
 
-- default target: `./.claude/skills/apifire`
-- `--user`: installs to `$HOME/.claude/skills/apifire`
-- `--target DIR`: installs to `DIR/apifire`
-- existing installations are replaced with the current copy
+This repository still includes `install.sh` for direct file-based installation, but plugin-based installation is the recommended path.
 
 ## Purpose
 
