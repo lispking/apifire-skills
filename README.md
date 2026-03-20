@@ -1,24 +1,26 @@
 # apifire-skills
 
-Open-source Claude Code skill files for the `apifire` CLI.
+Claude Code plugin that installs the apifire skill for API testing workflows.
 
-## Included skill
+## What this repository ships
 
-- `apifire`
+This repository packages the `apifire` Claude Code skill as a plugin and also keeps the source skill files in-repo for local development and legacy file-based installation.
 
-This plugin installs a Claude Code skill that helps turn natural-language requests into verified `apifire` commands for:
+The installed skill helps turn natural-language requests into verified `apifire` CLI commands for:
 - initializing API test projects
 - running API tests
-- running auth-only flows
+- running auth-only flows and retrieving tokens
 - validating `.apifire` configuration
 - explaining and troubleshooting `apifire` usage
 
 ## Repository layout
 
-- `.claude-plugin/marketplace.json` — plugin marketplace metadata
-- `.claude/skills/apifire/` — installable Claude Code skill
-- `skills/apifire/` — source copy of the skill files
-- `install.sh` — legacy installer for direct file-based installation
+- `.claude-plugin/plugin.json` — Claude Code plugin metadata
+- `.claude-plugin/marketplace.json` — marketplace metadata
+- `skills/apifire/` — checked-in source for the `apifire` skill
+- `install.sh` — legacy installer that copies `skills/apifire` into a Claude skills directory
+
+When installed, the skill ends up in a Claude skills directory such as `.claude/skills/apifire/`, but that path is an installation target, not a checked-in repository directory.
 
 ## Install with Claude Code plugins
 
@@ -34,32 +36,61 @@ Recommended flow in Claude Code:
 
 After installation, Claude Code should discover the `apifire` skill from the installed plugin.
 
-## Alternative local setup
+## Verified command coverage
 
-If you want to use the files directly from a local checkout instead of installing via plugins, Claude Code can discover repo-local skills from `.claude/skills/`.
-
-Example:
-
-```bash
-mkdir -p .claude/skills
-ln -s ../../skills/apifire .claude/skills/apifire
-```
-
-You can also copy it into a user-level Claude skills directory if that matches your setup.
-
-## Legacy installer
-
-This repository still includes `install.sh` for environments that prefer direct file-based installation, but plugin-based installation is the recommended path.
-
-## Command coverage
-
-This repository currently documents verified support for:
+Based on verified `apifire --help` output and verified examples, this repository currently documents support for these commands:
 - `apifire init`
 - `apifire run`
 - `apifire auth`
 - `apifire validate`
 
-The skill content was updated from real help output rather than guessed subcommands.
+Verified global flags:
+- `--verbose`
+- `--dir <DIR>`
+- `--help`
+- `--version`
+
+Verified use cases:
+- initialize a new API test project
+- run all tests or selected request files
+- run authentication only and retrieve a token
+- validate `.apifire` configuration
+- get usage help and troubleshoot command syntax
+
+These docs are based on verified help output and checked examples. They do not claim support for unverified `apifire` commands or features.
+
+## Legacy installer
+
+Plugin-based installation is the recommended path, but `install.sh` is still available for direct file-based installation.
+
+Exact installer behavior:
+- default target: `./.claude/skills/apifire`
+- `--user` target: `$HOME/.claude/skills/apifire`
+- `--target DIR` installs into `DIR/apifire`
+- source copied by the installer: `skills/apifire`
+
+Examples:
+
+```bash
+sh install.sh
+sh install.sh --user
+sh install.sh --target /path/to/.claude/skills
+```
+
+## Reference
+
+For verified usage examples and skill-specific documentation, see:
+- `skills/apifire/examples.md`
+- `skills/apifire/README.md`
+
+Minimal verified examples:
+
+```bash
+apifire init --name demo-api --url https://api.example.com
+apifire run
+apifire auth --token-only
+apifire validate
+```
 
 ## License
 
