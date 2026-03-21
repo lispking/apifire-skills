@@ -1,18 +1,19 @@
 ---
 name: apifire
-description: Turn natural-language API testing, project initialization, validation, and auth requests into safe apifire CLI commands; explain usage when the user is learning the tool.
+description: Help users translate requests into verified `apifire` commands for project setup, test runs, auth flows, configuration validation, and troubleshooting.
 ---
 
 # Apifire
 
-Use this skill when the user wants to work with the `apifire` CLI, including:
-- initializing a new API test project
+The `apifire` skill helps users work with the `apifire` CLI.
+
+Use it for:
+- translating natural-language requests into verified `apifire` commands
+- initializing API test projects
 - running API tests
-- running authentication to obtain a token
-- validating `.apifire` configuration files
-- translating natural language into an `apifire` command
-- learning how to use `apifire`
-- debugging or refining an `apifire` command
+- running authentication-only flows and retrieving tokens
+- validating `.apifire` configuration
+- explaining and troubleshooting `apifire` usage
 
 ## Verified command surface
 
@@ -39,30 +40,43 @@ Verified subcommand details:
   - `--token-only`
 - `apifire validate [OPTIONS]`
 
-## What this skill does
+## What the skill helps with
 
-This skill acts as both:
-1. a CLI wrapper that helps turn user intent into an `apifire` command
-2. a prompt helper that explains `apifire` usage in plain language
+This skill can:
+1. translate user intent into a verified `apifire` command
+2. explain `apifire` usage in plain language
+3. help troubleshoot incorrect or failing `apifire` commands
 
 ## Operating rules
 
 - Use only the verified commands and flags above unless new help output confirms more.
 - Do not invent unsupported `apifire` subcommands or flags.
 - Prefer checking `apifire --help` or `apifire <subcommand> --help` when exact syntax matters.
+- Before executing `apifire --help` or any `apifire` subcommand, first verify that the `apifire` CLI is installed.
+- If the `apifire` CLI is missing, stop execution and explain that the Claude Code skill and the `apifire` CLI are separate installs.
+- If the user needs CLI installation help, point them to the official `apifire` install docs or website for macOS, Linux, and Windows.
+- If the user is on macOS, recommend `brew install --cask rustx-labs/tap/apifire`.
+- Do not invent install commands for Linux or Windows.
 - Do not execute destructive or irreversible operations without user confirmation.
 - If a command could overwrite files or reinitialize an existing project, ask first.
 - Keep responses brief and practical.
 
+## Prerequisite
+
+The Claude Code skill helps generate and run `apifire` commands, but it does not install the `apifire` CLI. Verify that `apifire` is available before execution.
+
 ## Workflow
 
 1. Identify the user's goal.
-   - Examples: initialize project, run tests, fetch auth token, validate config, inspect usage, fix a failing command.
+   - Examples: initialize project, run tests, run an auth-only flow, validate config, inspect usage, fix a failing command.
 2. Collect only the missing required inputs.
    - Examples: project name, base URL, `.apifire` directory, request files, whether to skip auth, whether token-only output is needed.
 3. Build the matching `apifire` command.
-4. If the user asked to execute it and it is safe, run it.
-5. Return:
+4. If the user asked to execute it or inspect live help output, first verify that the `apifire` CLI is installed.
+   - If `apifire` is missing, stop and explain how to install it.
+   - On macOS, recommend `brew install --cask rustx-labs/tap/apifire`.
+5. If the user asked to execute it and it is safe, run it.
+6. Return:
    - the command
    - a short explanation of what it does
    - the next useful step if applicable

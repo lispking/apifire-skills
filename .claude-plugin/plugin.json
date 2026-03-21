@@ -1,13 +1,13 @@
 {
   "name": "apifire-skills",
   "version": "0.1.0",
-  "description": "Claude Code plugin that installs the apifire skill for API testing workflows.",
+  "description": "Claude Code plugin for the apifire skill with website-guided installation for API testing workflows.",
   "author": {
     "name": "lispking",
     "url": "https://github.com/lispking"
   },
   "repository": "https://github.com/lispking/apifire-skills",
-  "homepage": "https://github.com/lispking/apifire-skills",
+  "homepage": "https://apifire.vercel.app",
   "license": "Apache-2.0",
   "keywords": [
     "api",
